@@ -1,0 +1,13 @@
+
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+body {
+  background: black !important;
+  color: #e6eef8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
