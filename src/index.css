@@ -5,9 +5,10 @@ html, body, #root {
   margin: 0;
 }
 body {
-  background: black !important;
+  background: rgb(0, 0, 0) !important;
   color: #e6eef8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 

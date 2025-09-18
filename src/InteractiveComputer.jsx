@@ -4,6 +4,7 @@ import { useThree, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { Computer } from "./Computer"; 
+import MonitorScreen from "./MonitorScreen";
 
 
 export default function InteractiveComputer(props) {
@@ -45,10 +46,11 @@ export default function InteractiveComputer(props) {
     if (mode === "zoomed") {
       const screen = groupRef.current.getObjectByName("Object_19");
       if (screen) {
+          
         const target = new THREE.Vector3();
         screen.getWorldPosition(target);
 
-        const desiredPos = target.clone().add(new THREE.Vector3(0, 0.5, 2.8));
+        const desiredPos = target.clone().add(new THREE.Vector3(0, 0, 2.8));
         camera.lookAt(target)
         camera.position.lerp(desiredPos, 0.05);
 
@@ -72,7 +74,24 @@ export default function InteractiveComputer(props) {
       >
         <Computer {...props} />
       </group>
-      <OrbitControls ref={controlsRef} enablePan={false} />
+      <OrbitControls
+        ref={controlsRef}
+        enablePan={true}
+        enableZoom={false} // optional: disables scroll zoom
+        minPolarAngle={Math.PI / 2 - Math.PI / 18} //80° (10° above horizontal)
+        maxPolarAngle={Math.PI / 2} // 90° (exactly horizontal, never below)
+        minAzimuthAngle={-Math.PI / 18}// -10° left
+        maxAzimuthAngle={Math.PI / 18} // +10° right
+        onChange={(e) => {
+          // fires every time user changes controls
+          const z = e.target.object.position.z;
+          if (z < 3) {
+            controlsRef.current.enabled = false;
+          }else{
+            controlsRef.current.enabled = true;
+          }
+        }}
+      />
     </>
   );
 }
