@@ -1,14 +1,45 @@
-
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+}
 
 html, body, #root {
   height: 100%;
+  width: 100%;
   margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevents scrollbars on 3D scene */
 }
+
 body {
   background: rgb(0, 0, 0) !important;
   color: #e6eef8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Prevent text selection on touch devices */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Prevent touch scrolling/bouncing */
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
 }
 
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  body {
+    /* Improve touch performance */
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  body {
+    /* Better rendering on retina displays */
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+}
 
